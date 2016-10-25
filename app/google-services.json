@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "111142499073",
+    "firebase_url": "https://turbotaxmobile.firebaseio.com",
+    "project_id": "turbotaxmobile",
+    "storage_bucket": "turbotaxmobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111142499073:android:3f10bb2fee90784d",
+        "android_client_info": {
+          "package_name": "turbotaxmovil.ideaspymes.com.py.turbotaxmovil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "111142499073-qtqq918oqjbf42tfspf0jhp9d0bc4nnp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "turbotaxmovil.ideaspymes.com.py.turbotaxmovil",
+            "certificate_hash": "15A4E35432802024BD108DEE9FC2C48E5A653A84"
+          }
+        },
+        {
+          "client_id": "111142499073-79lrbfcp9bn4sl9fn75gr2gfoj2qf0m4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiEqA5i8r5DASp4mEWE9sWoNsh-3Hn4ng"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "111142499073-79lrbfcp9bn4sl9fn75gr2gfoj2qf0m4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

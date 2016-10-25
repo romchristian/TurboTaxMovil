@@ -3,12 +3,17 @@ package turbotaxmovil.ideaspymes.com.py.turbotaxmovil;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.Query;
+import com.firebase.ui.FirebaseListAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -24,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private String userId = "@cromero";
     private String annio = "2016";
     private String periodo = "oct";
+    private ListView mensajes;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         value = (EditText) findViewById(R.id.editTextValue);
         btn = (Button) findViewById(R.id.buttonEnviar);
+        mensajes = (ListView) findViewById(R.id.mensajes_list);
 
 
         //TelephonyManager tMgr = (TelephonyManager)this.getSystemService(Context.TELEPHONY_SERVICE);
@@ -115,5 +124,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Query queryRef = rootRef.orderByChild("userId").equalTo("@cromero");
+        FirebaseListAdapter<String> adapter = new FirebaseListAdapter<String>(
+                this,
+                String.class,
+                android.R.layout.simple_list_item_1,
+                queryRef
+        ) {
+            @Override
+            protected void populateView(View view, String s, int i) {
+                TextView textView = (TextView) findViewById(android.R.id.text1);
+                textView.setText(s);
+            }
+        };
+
+        mensajes.setAdapter(adapter);
     }
 }

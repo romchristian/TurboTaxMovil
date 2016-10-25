@@ -10,23 +10,45 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="turbotaxmovil.ideaspymes.com.py.turbotaxmovil.MainActivity">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="54dp"
-        android:id="@+id/editTextValue"
-        android:layout_alignParentEnd="true" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <Button
-        android:text="Enviar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/buttonEnviar"
-        android:layout_below="@+id/editTextValue"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="33dp" />
+        <ListView
+            android:id="@+id/mensajes_list"
+            android:layout_weight="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <EditText
+                android:layout_weight="8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Mensaje"
+                android:ems="10"
+                android:id="@+id/editTextValue" />
+
+            <Button
+                android:text="Enviar"
+                android:id="@+id/buttonEnviar"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
 </RelativeLayout>

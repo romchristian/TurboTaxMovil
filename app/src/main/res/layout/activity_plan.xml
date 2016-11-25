@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_plan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="turbotaxmovil.ideaspymes.com.py.turbotaxmovil.PlanActivity">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tipoIngresoSalario"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        card_view:cardCornerRadius="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txtSalarios"
+                android:text="SALARIOS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtSalariosDesc"
+                android:text="Ingresos en relación de dependencia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtSalarios"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgSalario"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/salario"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tipoIngresoHonorario"
+        android:layout_below="@+id/tipoIngresoSalario"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        card_view:cardCornerRadius="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txtHonorario"
+                android:text="HONORARIOS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtHonorarioDesc"
+                android:text="Ingresos por actividad profesional o por alquileres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtHonorario"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgHonorario"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/salario"/>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tipoIngresoDividendo"
+        android:layout_below="@+id/tipoIngresoHonorario"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        card_view:cardCornerRadius="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txtDividendo"
+                android:text="DIVIDENDOS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtDividendoDesc"
+                android:text="Ingresos por participación de sociedades o cooperativas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtDividendo"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgDividendo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/salario"/>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/tipoIngresoIntereses"
+        android:layout_below="@+id/tipoIngresoDividendo"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        card_view:cardCornerRadius="2dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/txtIntereses"
+                android:text="INTERESES"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txtInteresesDesc"
+                android:text="Ingresos por inversiones financieras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtIntereses"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgIntereses"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@mipmap/salario"/>
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/tipoIngresoIntereses">
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:id="@+id/planBasico"
+            android:layout_width="82dp"
+            android:layout_height="150dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+            <TextView
+                android:id="@+id/txtPlanBasico"
+                android:text="BÁSICO"
+                android:textSize="12sp"
+
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtPlanBasicoCosto"
+                    android:text="50"
+                    android:textSize="24dp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanBasico"/>
+
+
+                <TextView
+                    android:id="@+id/txtPlanBasicoMil"
+                    android:text="mil"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanBasicoCosto"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:id="@+id/planDeluxe"
+            android:layout_width="82dp"
+            android:layout_height="150dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtPlanDeluxe"
+                    android:text="DELUXE"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtPlanDeluxeCosto"
+                    android:text="100"
+                    android:textSize="24dp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanDeluxe"/>
+
+                <TextView
+                    android:id="@+id/txtPlanDeluxeMil"
+                    android:text="mil"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanDeluxeCosto"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_marginTop="10dp"
+            android:id="@+id/planPremiun"
+            android:layout_width="82dp"
+            android:layout_height="150dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtPlanPremiun"
+                    android:text="PREMIUN"
+                    android:textSize="12sp"
+
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtPlanPremiunCosto"
+                    android:text="150"
+                    android:textSize="24dp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanPremiun"/>
+
+                <TextView
+                    android:id="@+id/txtPlanPremiunMil"
+                    android:text="mil"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanPremiunCosto"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/planPlatinum"
+            android:layout_marginTop="10dp"
+            android:layout_width="82dp"
+            android:layout_height="150dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/txtPlanPlatinum"
+                    android:text="PLATINUM"
+                    android:textSize="12sp"
+
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:id="@+id/txtPlanPlatinumCosto"
+                    android:text="200"
+                    android:textSize="24dp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="10dp"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanPlatinum"/>
+
+                <TextView
+                    android:id="@+id/txtPlanPlatinumMil"
+                    android:text="mil"
+                    android:textSize="15dp"
+                    android:textColor="@color/colorAccent"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtPlanPlatinumCosto"/>
+
+            </RelativeLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

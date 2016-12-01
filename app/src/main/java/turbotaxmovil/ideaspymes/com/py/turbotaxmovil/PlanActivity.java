@@ -1,11 +1,15 @@
 package turbotaxmovil.ideaspymes.com.py.turbotaxmovil;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.Toast;
+
+import com.firebase.client.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
 
 import static android.R.id.toggle;
 
@@ -32,10 +36,15 @@ public class PlanActivity extends AppCompatActivity implements View.OnClickListe
     private boolean checkPremiun;
     private boolean checkPlatinum;
 
+    private Firebase rootRef;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        rootRef = new Firebase("https://turbotaxmobile.firebaseio.com/users/" + auth.getCurrentUser().getUid());
 
         setupViews();
     }
@@ -194,18 +203,21 @@ public class PlanActivity extends AppCompatActivity implements View.OnClickListe
     public void enviarPlanBasico(){
         if(checkBasico){
             Toast.makeText(this,"Plan seleccionado: Básico",Toast.LENGTH_LONG).show();
+            guardarPlan("BASICO");
         }
     }
 
     public void enviarPlanDeluxe(){
         if(checkDeluxe){
             Toast.makeText(this,"Plan seleccionado: Deluxe",Toast.LENGTH_LONG).show();
+            guardarPlan("DELUXE");
         }
     }
 
     public void enviarPlanPremiun(){
         if(checkPremiun){
             Toast.makeText(this,"Plan seleccionado: Premiun",Toast.LENGTH_LONG).show();
+            guardarPlan("PREMIUN");
         }
     }
 
@@ -213,6 +225,15 @@ public class PlanActivity extends AppCompatActivity implements View.OnClickListe
 
         if(checkPlatinum){
             Toast.makeText(this,"Plan seleccionado: Platinum",Toast.LENGTH_LONG).show();
+            guardarPlan("PLATINUM");
         }
+    }
+
+    public void guardarPlan(final  String plan){
+        rootRef.child("plan")
+                .setValue(plan);
+
+        startActivity(new Intent(PlanActivity.this,PerfilActivity.class));
+        finish();
     }
 }

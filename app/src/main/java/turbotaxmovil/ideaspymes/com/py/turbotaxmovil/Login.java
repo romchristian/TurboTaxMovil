@@ -4,13 +4,16 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +26,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     private Button buttonRegistrar;
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private Firebase rootRef;
 
 
     @Override
@@ -42,8 +46,29 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() != null){
 
-                    startActivity(new Intent(Login.this,MainActivity.class));
-                    finish();
+                    rootRef = new Firebase("https://turbotaxmobile.firebaseio.com/users/" + firebaseAuth.getCurrentUser().getUid());
+                    Log.d("LOGIN","En el listener Auth");
+
+                    rootRef.child("plan").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            Log.d("LOGIN","Hay Plan: " + dataSnapshot.getValue());
+                            if(dataSnapshot.getValue() != null) {
+                                startActivity(new Intent(Login.this, MainActivity.class));
+                            }else{
+                                startActivity(new Intent(Login.this,PlanActivity.class));
+                            }
+                            finish();
+                        }
+
+                        @Override
+                        public void onCancelled(FirebaseError firebaseError) {
+                            Log.d("LOGIN","Fue cancelado .. no hay plan?: " );
+                            startActivity(new Intent(Login.this,PlanActivity.class));
+                            finish();
+                        }
+                    });
+
                 }
             }
         };
@@ -77,15 +102,19 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void loginWithEmailAndPassword(String email, String password){
-        auth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(!task.isSuccessful()){
-                    Toast.makeText(Login.this,"Fallo login", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+        if(email != null && password != null && !email.isEmpty() && !password.isEmpty()) {
+            auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (!task.isSuccessful()) {
+                                Toast.makeText(Login.this, "Fallo login", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+        }else{
+            Toast.makeText(this,"Debe ingreasar email y password", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

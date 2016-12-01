@@ -32,12 +32,8 @@ import static android.R.attr.key;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText value;
-    private Button btn;
     private Firebase rootRef;
-    private String userId = "@cromero";
-
-    private ListView mensajes;
+    private Button buttonLogout;
 
 
     @Override
@@ -45,13 +41,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseAuth auth = FirebaseAuth.getInstance();
+        buttonLogout = (Button) findViewById(R.id.buttonLogout);
+
 
         rootRef = new Firebase("https://turbotaxmobile.firebaseio.com/users/" + auth.getCurrentUser().getUid());
         Log.d("MAIN", auth.getCurrentUser().getProviderId());
 
-        value = (EditText) findViewById(R.id.editTextValue);
+        buttonLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logout();
+            }
+        });
+
+       /* value = (EditText) findViewById(R.id.editTextValue);
         btn = (Button) findViewById(R.id.buttonEnviar);
         mensajes = (ListView) findViewById(R.id.mensajes_list);
+
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +79,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        */
 
     }
+
+
 
     @Override
     protected void onStart() {
@@ -82,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Query queryRef = rootRef
+       /* Query queryRef = rootRef
                 .child("gastos")
                 .orderByChild("timbrado");
 
@@ -101,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         mensajes.setAdapter(adapter);
+        */
 
     }
 
@@ -160,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    private void logout() {
         FirebaseAuth.getInstance().signOut();
+        finish();
     }
 }

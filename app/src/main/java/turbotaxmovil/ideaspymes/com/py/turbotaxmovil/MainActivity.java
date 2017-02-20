@@ -1,6 +1,9 @@
 package turbotaxmovil.ideaspymes.com.py.turbotaxmovil;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.speech.RecognizerIntent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,15 +29,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import static android.R.attr.key;
+import static android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Firebase rootRef;
     private Button buttonLogout;
+    private ImageButton btnSpeak;
+    private final int REQ_CODE_SPEECH_INPUT = 100;
+
 
 
     @Override
@@ -42,17 +52,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FirebaseAuth auth = FirebaseAuth.getInstance();
         buttonLogout = (Button) findViewById(R.id.buttonLogout);
+        btnSpeak =(ImageButton) findViewById(R.id.btnSpeak);
 
 
         rootRef = new Firebase("https://turbotaxmobile.firebaseio.com/users/" + auth.getCurrentUser().getUid());
         Log.d("MAIN", auth.getCurrentUser().getProviderId());
 
-        buttonLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-            }
-        });
+
+        btnSpeak.setOnClickListener(this);
+        buttonLogout.setOnClickListener(this);
 
        /* value = (EditText) findViewById(R.id.editTextValue);
         btn = (Button) findViewById(R.id.buttonEnviar);
@@ -175,5 +183,55 @@ public class MainActivity extends AppCompatActivity {
     private void logout() {
         FirebaseAuth.getInstance().signOut();
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnSpeak:
+             promptSpeechInput();
+            break;
+            case R.id.buttonLogout:
+                logout();
+                break;
+        }
+    }
+
+
+    private void promptSpeechInput() {
+        Intent intent = new Intent(ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT,"Di el numero de menu");
+        try {
+            startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
+        } catch (ActivityNotFoundException a) {
+            Toast.makeText(getApplicationContext(),"Metodo de voz no soportado",
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Receiving speech input
+     * */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case REQ_CODE_SPEECH_INPUT: {
+                if (resultCode == RESULT_OK && null != data) {
+
+                    ArrayList<String> result = data
+                            .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+                    Toast.makeText(getApplicationContext(),result.get(0),
+                            Toast.LENGTH_SHORT).show();
+                    //txtSpeechInput.setText(result.get(0));
+                }
+                break;
+            }
+
+        }
     }
 }

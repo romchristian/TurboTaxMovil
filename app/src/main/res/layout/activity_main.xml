@@ -31,7 +31,7 @@
             android:padding="10dp">
             <TextView
                 android:id="@+id/txt"
-                android:text="INGRESOS"
+                android:text="1. INGRESOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -57,7 +57,7 @@
             android:padding="10dp">
             <TextView
                 android:id="@+id/txtHonorario"
-                android:text="GASTOS"
+                android:text="2. GASTOS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -85,7 +85,7 @@
             android:padding="10dp">
             <TextView
                 android:id="@+id/txtDividendo"
-                android:text="INVERSIONES"
+                android:text="3. INVERSIONES"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
@@ -100,4 +100,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
+
+    <ImageButton
+        android:id="@+id/btnSpeak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:src="@mipmap/mic"
+        android:layout_above="@+id/buttonLogout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="59dp" />
+
+    <TextView
+        android:text="Acceso Por Voz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSpeak"
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:id="@+id/textView"
+        android:layout_alignStart="@+id/tipoIngresoDividendo"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>

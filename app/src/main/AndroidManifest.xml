@@ -19,7 +19,7 @@
         <activity android:name=".MainActivity" />
         <activity
             android:name=".Login"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".PlanActivity" />
         <activity
             android:name=".SplashActivity"
@@ -32,7 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PerfilActivity"></activity>
+        <activity android:name=".PerfilActivity" />
+        <activity android:name=".ClasificacionActivity"></activity>
     </application>
 
 </manifest>

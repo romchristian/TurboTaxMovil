@@ -225,9 +225,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     ArrayList<String> result = data
                             .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    Toast.makeText(getApplicationContext(),result.get(0),
-                            Toast.LENGTH_SHORT).show();
-                    //txtSpeechInput.setText(result.get(0));
+
+                    Intent intent = new Intent(this,ClasificacionActivity.class);
+
+                    int libroIndex = 0;
+
+                    try {
+                        libroIndex = Integer.parseInt(result.get(0));
+                    }catch (Exception ex){
+
+                    }
+                    if(libroIndex > 0) {
+                        intent.putExtra("libroIndex", libroIndex);
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(),result.get(0)+" no es una opción!",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
                 break;
             }

@@ -1,6 +1,7 @@
 package turbotaxmovil.ideaspymes.com.py.turbotaxmovil;
 
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.fragment.ImpuestoFragment;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ActualizadorService;
 
 public class MainInputActivity extends AppCompatActivity implements ImpuestoFragment.OnFragmentInteractionListener{
 
@@ -37,5 +39,17 @@ public class MainInputActivity extends AppCompatActivity implements ImpuestoFrag
     @Override
     public void onFragmentInteraction(Uri uri) {
         Log.d("FRAGMENT_INTERACTION","Uri: " + uri);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
     }
 }

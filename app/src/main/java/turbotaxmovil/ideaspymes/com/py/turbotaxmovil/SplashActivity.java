@@ -17,6 +17,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ActualizadorService;
+
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
@@ -84,7 +86,7 @@ public class SplashActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d("LOGIN","Hay Plan: " + dataSnapshot.getValue());
                             if(dataSnapshot.getValue() != null) {
-                                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                                startActivity(new Intent(SplashActivity.this, MainInputActivity.class));
                             }else{
                                 startActivity(new Intent(SplashActivity.this,PlanActivity.class));
                             }
@@ -118,6 +120,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth.addAuthStateListener(authStateListener);
+        startService(new Intent(this, ActualizadorService.class));
+        Log.d("SERVICIO","START SERVICE" );
+
     }
 
     @Override
@@ -126,6 +131,9 @@ public class SplashActivity extends AppCompatActivity {
         if(authStateListener != null){
             auth.removeAuthStateListener(authStateListener);
         }
+        stopService(new Intent(this, ActualizadorService.class));
+
+
     }
 
     private void hide() {

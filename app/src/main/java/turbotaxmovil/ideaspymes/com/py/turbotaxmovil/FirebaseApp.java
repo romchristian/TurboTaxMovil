@@ -9,9 +9,16 @@ import com.firebase.client.Firebase;
  */
 
 public class FirebaseApp extends Application {
+
+    private static FirebaseApp mInstance;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Firebase.setAndroidContext(this);
+        mInstance = this;
+    }
+    public static synchronized FirebaseApp getInstance() {
+        return mInstance;
     }
 }

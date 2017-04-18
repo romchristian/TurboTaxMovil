@@ -7,8 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.j256.ormlite.android.apptools.OpenHelperManager;
+
+import java.util.List;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.OrmBaseLiteFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +31,17 @@ public class ImpuestoFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private DatabaseHelper databaseHelper = null;
+
+    protected DatabaseHelper getHelper() {
+        if (databaseHelper == null) {
+            databaseHelper =
+                    OpenHelperManager.getHelper(getActivity(), DatabaseHelper.class);
+        }
+        return databaseHelper;
+    }
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -55,10 +74,13 @@ public class ImpuestoFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -66,6 +88,7 @@ public class ImpuestoFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_impuesto, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -105,5 +128,21 @@ public class ImpuestoFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        List<Impuesto>  lista = getHelper().getImpuestoDataDao().queryForAll();
+        Toast.makeText(getActivity(),"Impuestos : "  + lista.size(),Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (databaseHelper != null) {
+            OpenHelperManager.releaseHelper();
+            databaseHelper = null;
+        }
     }
 }

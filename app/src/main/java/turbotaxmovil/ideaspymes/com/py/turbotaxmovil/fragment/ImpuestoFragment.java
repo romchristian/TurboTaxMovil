@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
@@ -14,6 +16,7 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import java.util.List;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.adapters.ImpuestoListAdapter;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.OrmBaseLiteFragment;
@@ -32,7 +35,10 @@ public class ImpuestoFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
     private DatabaseHelper databaseHelper = null;
+    private ImpuestoListAdapter adapter;
+    private ListView listView;
 
     protected DatabaseHelper getHelper() {
         if (databaseHelper == null) {
@@ -87,7 +93,13 @@ public class ImpuestoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_impuesto, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_impuesto, container, false);
+
+        listView = (ListView) v.findViewById(R.id.impuestoListView);
+
+
+        return v;
 
     }
 
@@ -133,8 +145,11 @@ public class ImpuestoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        List<Impuesto>  lista = getHelper().getImpuestoDataDao().queryForAll();
-        Toast.makeText(getActivity(),"Impuestos : "  + lista.size(),Toast.LENGTH_LONG).show();
+        List<Impuesto> lista = getHelper().getImpuestoDataDao().queryForAll();
+        adapter = new ImpuestoListAdapter(getActivity(), R.layout.itemlistrow, lista);
+        listView.setAdapter(adapter);
+        Toast.makeText(getActivity(), "Impuestos : " + lista.size(), Toast.LENGTH_LONG).show();
+
     }
 
     @Override

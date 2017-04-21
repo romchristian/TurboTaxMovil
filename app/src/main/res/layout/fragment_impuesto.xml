@@ -5,9 +5,27 @@
     tools:context="turbotaxmovil.ideaspymes.com.py.turbotaxmovil.fragment.ImpuestoFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_alignParentTop="true"
+            android:padding="15dp"
+            android:text="Impuesto" />
+
+        <ListView
+
+            android:id="@+id/impuestoListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
 
 </FrameLayout>

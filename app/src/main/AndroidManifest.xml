@@ -35,13 +35,24 @@
         </activity>
         <activity android:name=".PerfilActivity" />
         <activity android:name=".ClasificacionActivity" />
-        <activity android:name=".MainInputActivity">
 
-        </activity>
         <service
             android:name=".volley.ActualizadorService"
             android:enabled="true"
             android:exported="true" />
+
+        <activity
+            android:name=".wizard.ImpuestoActivity"
+            android:label="@string/title_activity_impuesto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".wizard.LibroActivity"
+            android:label="@string/title_activity_libro"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".wizard.ClasificacionUsuarioActivity"
+            android:label="@string/title_activity_clasificacion_usuario"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

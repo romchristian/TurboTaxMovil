@@ -20,4 +20,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_impuesto">ImpuestoActivity</string>
+    <string name="title_activity_libro">LibroActivity</string>
+    <string name="title_activity_clasificacion_usuario">ClasificacionUsuarioActivity</string>
 </resources>

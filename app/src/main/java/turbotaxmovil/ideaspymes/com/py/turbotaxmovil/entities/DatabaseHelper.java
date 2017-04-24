@@ -28,6 +28,12 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
     private Dao<Impuesto, Integer> impuestoDao = null;
     private RuntimeExceptionDao<Impuesto, Integer> impuestoRuntimeDao = null;
 
+    private Dao<Libro, Integer> libroDao = null;
+    private RuntimeExceptionDao<Libro, Integer> libroRuntimeDao = null;
+
+    private Dao<ClasificacionUsuario, Integer> clasificacionUsuarioDao = null;
+    private RuntimeExceptionDao<ClasificacionUsuario, Integer> clasificacionUsuarioRuntimeDao = null;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
     }
@@ -41,6 +47,8 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onCreate");
             TableUtils.createTable(connectionSource, Impuesto.class);
+            TableUtils.createTable(connectionSource, Libro.class);
+            TableUtils.createTable(connectionSource, ClasificacionUsuario.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -57,6 +65,8 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         try {
             Log.i(DatabaseHelper.class.getName(), "onUpgrade");
             TableUtils.dropTable(connectionSource, Impuesto.class, true);
+            TableUtils.dropTable(connectionSource, Libro.class, true);
+            TableUtils.dropTable(connectionSource, ClasificacionUsuario.class, true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -76,15 +86,44 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         return impuestoDao;
     }
 
+    public Dao<Libro, Integer> getLibroDao() throws SQLException {
+        if (libroDao == null) {
+            libroDao = getDao(Libro.class);
+        }
+        return libroDao;
+    }
+
+    public Dao<ClasificacionUsuario, Integer> getClasificacionUsuarioDao() throws SQLException {
+        if (clasificacionUsuarioDao == null) {
+            clasificacionUsuarioDao = getDao(ClasificacionUsuario.class);
+        }
+        return clasificacionUsuarioDao;
+    }
+
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our SimpleData class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
      */
+
     public RuntimeExceptionDao<Impuesto, Integer> getImpuestoDataDao() {
         if (impuestoRuntimeDao == null) {
             impuestoRuntimeDao = getRuntimeExceptionDao(Impuesto.class);
         }
         return impuestoRuntimeDao;
+    }
+
+    public RuntimeExceptionDao<Libro, Integer> getLibroDataDao() {
+        if (libroRuntimeDao == null) {
+            libroRuntimeDao = getRuntimeExceptionDao(Libro.class);
+        }
+        return libroRuntimeDao;
+    }
+
+    public RuntimeExceptionDao<ClasificacionUsuario, Integer> getClasificacionUsuarioDataDao() {
+        if (clasificacionUsuarioRuntimeDao == null) {
+            clasificacionUsuarioRuntimeDao = getRuntimeExceptionDao(ClasificacionUsuario.class);
+        }
+        return clasificacionUsuarioRuntimeDao;
     }
 
     /**
@@ -94,6 +133,8 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
     public void close() {
         super.close();
         impuestoDao = null;
+        impuestoRuntimeDao = null;
+        libroDao = null;
         impuestoRuntimeDao = null;
     }
 

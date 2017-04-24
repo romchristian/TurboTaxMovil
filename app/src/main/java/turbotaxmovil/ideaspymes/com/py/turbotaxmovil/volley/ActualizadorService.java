@@ -31,7 +31,12 @@ import java.util.TimerTask;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Libro;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.response.ImpuestoResponse;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.response.LibroResponse;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.servicios.ClasificacionWS;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.servicios.ImpuestoWS;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.servicios.LibroWS;
 
 
 public class ActualizadorService extends OrmLiteBaseService<DatabaseHelper> {
@@ -58,11 +63,7 @@ public class ActualizadorService extends OrmLiteBaseService<DatabaseHelper> {
     }
 
     private void startService() {
-        //Toast.makeText(this, "Start Service Actualizacion ...", Toast.LENGTH_LONG).show();
-        Log.d("SERVICIO", "DEBUG 0");
-        //timer.scheduleAtFixedRate(new mainTask(ctx), 0, 1000000000);
         new mainTask(ctx).run();
-
         timer = new Timer();
         timer.scheduleAtFixedRate(new mainTask(ctx), 0, 3600000);
 
@@ -78,69 +79,41 @@ public class ActualizadorService extends OrmLiteBaseService<DatabaseHelper> {
 
         public void run() {
             toastHandler.sendEmptyMessage(0);
-
         }
     }
 
     public void onDestroy() {
-
         timer.cancel();
         timer.purge();
         super.onDestroy();
-        //Toast.makeText(this, "Service Actualizacion Stopped ...", Toast.LENGTH_LONG).show();
+
     }
 
     private final Handler toastHandler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
-            Log.d("SERVICIO", "DEBUG 1 ");
-
-            Log.d("SERVICIO", "DEBUG 2 ");
             cargaDatosBasicosEnParalelo();
-
         }
     };
 
 
     public void cargaDatosBasicosEnParalelo() {
-        Log.d("SERVICIO", "DEBUG 3 ");
         getImpuestos();
+        getLibros();
+        getClasificaciones();
     }
 
 
     public void getImpuestos() {
-        //final Context context = getApplicationContext();
-        final Context context = ctx;
-        Log.d("SERVICIO", "DEBUG 4");
+        ImpuestoWS.get(ctx, getHelper());
+    }
 
-        GsonRequestNoAuth<ImpuestoResponse> req = new GsonRequestNoAuth<ImpuestoResponse>(Request.Method.GET, ServidorURL.PREF_URL + "/impuesto/all",
-                ImpuestoResponse.class, null,
-                new Response.Listener<ImpuestoResponse>() {
-                    @Override
-                    public void onResponse(ImpuestoResponse response) {
-                        Log.d("SERVICIO", "response: " + response.getCodRetorno());
-                        if (response.getCodRetorno() == 200) {
-                            Log.d("SERVICIO", "response impuestos: " + response.getImpuestos());
-                            if (response.getImpuestos() != null && response.getImpuestos().length > 0) {
+    public void getLibros() {
+        LibroWS.get(ctx, getHelper());
+    }
 
-                                List<Impuesto> impuestos = Arrays.asList(response.getImpuestos());
-                                Log.d("SERVICIO", "lista: " + impuestos.size());
-                                for (Impuesto i : impuestos) {
-                                    getHelper().getImpuestoDataDao().createOrUpdate(i);
-                                }
-
-                            }
-                        }
-
-                    }
-                }, context);
-
-        int socketTimeout = 50000;//50 seconds - change to what you want
-        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
-        req.setRetryPolicy(policy);
-        MyVolley.addToQueue(req);
-
+    public void getClasificaciones() {
+        ClasificacionWS.get(ctx, getHelper());
     }
 
 

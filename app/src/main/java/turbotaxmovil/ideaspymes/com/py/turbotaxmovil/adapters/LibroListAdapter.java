@@ -14,22 +14,21 @@ import java.util.List;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
-
-import static android.R.attr.resource;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Libro;
 
 /**
  * Created by christian.romero on 21/04/2017.
  */
 
-public class ImpuestoListAdapter extends ArrayAdapter<Impuesto> {
+public class LibroListAdapter extends ArrayAdapter<Libro> {
 
 
 
-    public ImpuestoListAdapter(@NonNull Context context, @LayoutRes int resource) {
+    public LibroListAdapter(@NonNull Context context, @LayoutRes int resource) {
         super(context, resource);
     }
 
-    public ImpuestoListAdapter(@NonNull Context context, @LayoutRes int resource,List<Impuesto> lista) {
+    public LibroListAdapter(@NonNull Context context, @LayoutRes int resource, List<Libro> lista) {
         super(context, resource,lista);
     }
 
@@ -45,7 +44,7 @@ public class ImpuestoListAdapter extends ArrayAdapter<Impuesto> {
             v = vi.inflate(R.layout.itemlistrow, null);
         }
 
-        Impuesto p = getItem(position);
+        Libro p = getItem(position);
 
         if (p != null) {
             TextView tt1 = (TextView) v.findViewById(R.id.textIndice);
@@ -62,7 +61,6 @@ public class ImpuestoListAdapter extends ArrayAdapter<Impuesto> {
 
 
         }
-
 
         return v;
     }

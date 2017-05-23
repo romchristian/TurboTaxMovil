@@ -52,7 +52,8 @@
         <activity
             android:name=".wizard.ClasificacionUsuarioActivity"
             android:label="@string/title_activity_clasificacion_usuario"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".wizard.DocumentoActivity"></activity>
     </application>
 
 </manifest>

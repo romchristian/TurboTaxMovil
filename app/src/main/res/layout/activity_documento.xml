@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="turbotaxmovil.ideaspymes.com.py.turbotaxmovil.wizard.DocumentoActivity">
+
+
+
+    <EditText
+        android:id="@+id/ruc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="RUC Proveedor"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/razonSocial"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Razon Social"/>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alwaysDrawnWithCache="false"
+            android:ems="10"
+            android:text="Fecha"
+
+
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/vencimiento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="Vencimiento"
+
+            android:clickable="true"/>
+
+    </LinearLayout>
+
+
+    <EditText
+        android:id="@+id/timbrado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/razonSocial"
+        android:ems="10"
+        android:hint="Timbrado"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/codEsta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="001"
+            android:inputType="number" />
+
+
+        <EditText
+            android:id="@+id/puntoExp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:ems="10"
+            android:hint="001"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/numero"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="XXXXX"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/gravada10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/numero"
+        android:ems="10"
+        android:hint="Gravada 10"
+        android:inputType="number" />
+
+
+    <EditText
+        android:id="@+id/gravada5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/gravada10"
+        android:ems="10"
+        android:hint="Gravada 5"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/exenta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/gravada5"
+        android:ems="10"
+        android:hint="Exenta"
+        android:inputType="number" />
+
+
+    <Button
+        android:id="@+id/buttonGuardar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignBottom="@id/exenta"
+        android:text="Guardar" />
+
+
+
+
+</LinearLayout>

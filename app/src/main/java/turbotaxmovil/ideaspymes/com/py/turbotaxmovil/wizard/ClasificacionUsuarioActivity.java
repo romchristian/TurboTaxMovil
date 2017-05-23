@@ -57,9 +57,9 @@ public class ClasificacionUsuarioActivity extends OrmLiteBaseAppCompatActivity<D
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                /*Intent i = new Intent(context,LibroActivity.class);
-                i.putExtra("IMPUESTO_ID", adapterView.getAdapter().getItemId(position));
-                startActivity(i);*/
+                Intent i = new Intent(context,DocumentoActivity.class);
+                i.putExtra("CLASIFICACION_ID", adapterView.getAdapter().getItemId(position));
+                startActivity(i);
             }
         });
 

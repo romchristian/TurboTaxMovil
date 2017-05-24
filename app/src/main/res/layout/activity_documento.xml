@@ -38,8 +38,6 @@
             android:alwaysDrawnWithCache="false"
             android:ems="10"
             android:text="Fecha"
-
-
             android:clickable="true"/>
 
         <TextView

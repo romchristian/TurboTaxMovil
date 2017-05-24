@@ -41,6 +41,11 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service
+            android:name=".volley.SendDataService"
+            android:enabled="true"
+            android:exported="true" />
+
         <activity
             android:name=".wizard.ImpuestoActivity"
             android:label="@string/title_activity_impuesto"

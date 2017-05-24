@@ -34,6 +34,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.UUID;
 
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ActualizadorService;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.SendDataService;
+
 import static android.R.attr.key;
 import static android.speech.RecognizerIntent.ACTION_RECOGNIZE_SPEECH;
 
@@ -247,5 +250,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, SendDataService.class));
     }
 }

@@ -20,6 +20,7 @@ import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.adapters.ImpuestoListAdapte
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.OrmLiteBaseAppCompatActivity;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.SendDataService;
 
 public class ImpuestoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelper> {
 
@@ -70,5 +71,12 @@ public class ImpuestoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelpe
     @Override
     protected void onStart() {
         super.onStart();
+        startService(new Intent(this, SendDataService.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, SendDataService.class));
     }
 }

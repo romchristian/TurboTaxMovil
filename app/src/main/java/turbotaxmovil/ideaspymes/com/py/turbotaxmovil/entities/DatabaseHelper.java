@@ -34,6 +34,9 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
     private Dao<ClasificacionUsuario, Integer> clasificacionUsuarioDao = null;
     private RuntimeExceptionDao<ClasificacionUsuario, Integer> clasificacionUsuarioRuntimeDao = null;
 
+    private Dao<RegistroParam, Integer> registroParamDao = null;
+    private RuntimeExceptionDao<RegistroParam, Integer> registroParamRuntimeDao = null;
+
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION, R.raw.ormlite_config);
     }
@@ -49,6 +52,7 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Impuesto.class);
             TableUtils.createTable(connectionSource, Libro.class);
             TableUtils.createTable(connectionSource, ClasificacionUsuario.class);
+            TableUtils.createTable(connectionSource, RegistroParam.class);
         } catch (SQLException e) {
             Log.e(DatabaseHelper.class.getName(), "Can't create database", e);
             throw new RuntimeException(e);
@@ -67,6 +71,7 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Impuesto.class, true);
             TableUtils.dropTable(connectionSource, Libro.class, true);
             TableUtils.dropTable(connectionSource, ClasificacionUsuario.class, true);
+            TableUtils.dropTable(connectionSource, RegistroParam.class,true);
             // after we drop the old databases, we create the new ones
             onCreate(db, connectionSource);
         } catch (SQLException e) {
@@ -100,6 +105,13 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         return clasificacionUsuarioDao;
     }
 
+    public Dao<RegistroParam, Integer> getRegistroParamDao() throws SQLException {
+        if (registroParamDao == null) {
+            registroParamDao = getDao(RegistroParam.class);
+        }
+        return registroParamDao;
+    }
+
     /**
      * Returns the RuntimeExceptionDao (Database Access Object) version of a Dao for our SimpleData class. It will
      * create it or just give the cached value. RuntimeExceptionDao only through RuntimeExceptions.
@@ -126,6 +138,13 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         return clasificacionUsuarioRuntimeDao;
     }
 
+    public RuntimeExceptionDao<RegistroParam, Integer> getRegistroParamDataDao() {
+        if (registroParamRuntimeDao == null) {
+            registroParamRuntimeDao = getRuntimeExceptionDao(RegistroParam.class);
+        }
+        return registroParamRuntimeDao;
+    }
+
     /**
      * Close the database connections and clear any cached DAOs.
      */
@@ -136,6 +155,10 @@ public class DatabaseHelper  extends OrmLiteSqliteOpenHelper {
         impuestoRuntimeDao = null;
         libroDao = null;
         impuestoRuntimeDao = null;
+        clasificacionUsuarioDao = null;
+        clasificacionUsuarioRuntimeDao = null;
+        registroParamDao = null;
+        registroParamRuntimeDao = null;
     }
 
 }

@@ -17,6 +17,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.principal.PrincipalActivity;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ActualizadorService;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.SendDataService;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.wizard.ImpuestoActivity;
@@ -88,7 +89,7 @@ public class SplashActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Log.d("LOGIN","Hay Plan: " + dataSnapshot.getValue());
                             if(dataSnapshot.getValue() != null) {
-                                startActivity(new Intent(SplashActivity.this, ImpuestoActivity.class));
+                                startActivity(new Intent(SplashActivity.this, PrincipalActivity.class));
                             }else{
                                 startActivity(new Intent(SplashActivity.this,PlanActivity.class));
                             }

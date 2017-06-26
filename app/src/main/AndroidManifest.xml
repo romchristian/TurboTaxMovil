@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -40,7 +42,6 @@
             android:name=".volley.ActualizadorService"
             android:enabled="true"
             android:exported="true" />
-
         <service
             android:name=".volley.SendDataService"
             android:enabled="true"
@@ -58,7 +59,31 @@
             android:name=".wizard.ClasificacionUsuarioActivity"
             android:label="@string/title_activity_clasificacion_usuario"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".wizard.DocumentoActivity"></activity>
+        <activity android:name=".wizard.DocumentoActivity" />
+        <activity
+            android:name=".principal.PrincipalActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Principal"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity android:name=".principal.FacturaActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="Principal"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
+    <provider
+        android:name="android.support.v4.content.FileProvider"
+        android:authorities="${applicationId}.fileProvider"
+        android:exported="false"
+        android:grantUriPermissions="true">
+        <meta-data
+            android:name="android.support.FILE_PROVIDER_PATHS"
+            android:resource="@xml/provider_paths"/>
+    </provider>
 </manifest>

@@ -123,7 +123,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         auth.addAuthStateListener(authStateListener);
-        startService(new Intent(this, ActualizadorService.class));
+        //startService(new Intent(this, ActualizadorService.class));
 
         Log.d("SERVICIO","START SERVICE" );
 
@@ -135,7 +135,7 @@ public class SplashActivity extends AppCompatActivity {
         if(authStateListener != null){
             auth.removeAuthStateListener(authStateListener);
         }
-        stopService(new Intent(this, ActualizadorService.class));
+        //stopService(new Intent(this, ActualizadorService.class));
 
 
     }

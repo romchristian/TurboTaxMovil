@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -18,8 +19,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ActualizadorService;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.PreferencesUtil;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.ServidorURL;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.wizard.ImpuestoActivity;
 
 public class PrincipalActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -103,12 +106,30 @@ public class PrincipalActivity extends AppCompatActivity implements View.OnClick
 
     private void addEgreso() {
         Toast.makeText(getApplicationContext(),"Agregar Egreso",Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this,FacturaActivity.class));
+        startActivity(new Intent(this,ImpuestoActivity.class));
     }
 
     private void addIngreso() {
         Toast.makeText(getApplicationContext(),"Agregar Ingreso",Toast.LENGTH_LONG).show();
-        startActivity(new Intent(this,FacturaActivity.class));
+        startActivity(new Intent(this,ImpuestoActivity.class));
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        startService(new Intent(this, ActualizadorService.class));
+
+        Log.d("SERVICIO","START SERVICE" );
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopService(new Intent(this, ActualizadorService.class));
+
+
     }
 
 

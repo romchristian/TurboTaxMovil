@@ -5,11 +5,12 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "turbotaxmovil.ideaspymes.com.py.turbotaxmovil"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -28,7 +29,8 @@ android {
     }
 }
 ext {
-    supportLibVersion = '25.1.0'  // variable that can be referenced to keep support libs consistent
+    supportLibVersion = '25.3.0'  // variable that can be referenced to keep support libs consistent
+    firebaseLibVersion = '10.2.6'
 }
 
 dependencies {
@@ -47,20 +49,21 @@ dependencies {
     compile group: 'com.j256.ormlite', name: 'ormlite-android', version: '5.0'
 
 
-    compile 'com.google.firebase:firebase-core:9.8.0'
-    compile 'com.google.firebase:firebase-database:9.8.0'
-    compile 'com.google.firebase:firebase-auth:9.8.0'
-    compile 'com.firebase:firebase-client-android:2.3.1'
-    compile 'com.firebaseui:firebase-ui:0.3.1'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.google.code.gson:gson:2.2.4'
-    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile "com.google.firebase:firebase-core:${firebaseLibVersion}"
+    compile "com.google.firebase:firebase-auth:${firebaseLibVersion}"
+    compile "com.google.firebase:firebase-database:${firebaseLibVersion}"
+    compile "com.firebase:firebase-client-android:2.4.0"
+
+
+
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.google.code.gson:gson:2.8.1'
+    compile 'com.android.volley:volley:1.0.0'
     testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.google.api-client:google-api-client-android:1.22.0'
-    compile 'com.google.code.findbugs:jsr305:2.0.1'
-    compile 'commons-io:commons-io:2.5'
+    compile 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.android.support:multidex:1.0.1'
+
 }
 
 

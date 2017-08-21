@@ -12,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.j256.ormlite.logger.Log;
+
 import java.util.List;
 
 import butterknife.OnItemSelected;
@@ -51,7 +53,10 @@ public class ImpuestoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelpe
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(context,LibroActivity.class);
-                i.putExtra("IMPUESTO_ID", adapterView.getAdapter().getItemId(position));
+                Long impuestoId = adapterView.getAdapter().getItemId(position);
+                i.putExtra("IMPUESTO_ID", impuestoId);
+                android.util.Log.d("PROCESO", "impuestoId : "  + impuestoId);
+                Proceso.instance().impuestoId = impuestoId;
                 startActivity(i);
             }
         });

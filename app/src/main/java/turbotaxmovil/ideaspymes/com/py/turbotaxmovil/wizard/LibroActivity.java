@@ -59,7 +59,10 @@ public class LibroActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelper> 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent i = new Intent(context,ClasificacionUsuarioActivity.class);
-                i.putExtra("LIBRO_ID", adapterView.getAdapter().getItemId(position));
+
+                Long libroId = adapterView.getAdapter().getItemId(position);
+                i.putExtra("LIBRO_ID", libroId);
+                Proceso.instance().libroId = libroId;
                 startActivity(i);
             }
         });

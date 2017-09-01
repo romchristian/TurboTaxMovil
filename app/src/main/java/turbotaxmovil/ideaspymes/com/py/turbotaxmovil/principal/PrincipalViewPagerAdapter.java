@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.fragments.PieFragment;
+
 /**
  * Created by christian.romero on 22/06/2017.
  */
@@ -21,7 +23,7 @@ public class PrincipalViewPagerAdapter extends FragmentPagerAdapter{
         switch (position) {
             case 0:
 
-                currentFragment = new IngresosFragment();
+                currentFragment = new PieFragment();
                 break;
             case 1:
 

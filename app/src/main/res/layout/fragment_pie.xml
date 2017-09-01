@@ -1,0 +1,17 @@
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    tools:context="turbotaxmovil.ideaspymes.com.py.turbotaxmovil.fragments.PieFragment">
+
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/pieChart1"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" />
+</android.support.v7.widget.CardView>
+
+

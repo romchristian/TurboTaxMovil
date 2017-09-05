@@ -15,6 +15,7 @@ import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Libro;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.RegistroParam;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.utils.Contants;
 
 /**
  * Created by christian.romero on 01/09/2017.
@@ -75,10 +76,15 @@ public class EgresosAdapder extends RecyclerView.Adapter<EgresosAdapder.ViewHold
 
 
 
-        holder.mTextViewSimbolo.setText("+");
-        holder.mTextViewDescripcion.setText(r.getClasificacionUsuarioId()+"");
+        if(r.getTipoMovimiento().compareToIgnoreCase(Contants.TIPO_MOV_INGRESO)==0){
+            holder.mTextViewSimbolo.setText("+");
+        }else{
+            holder.mTextViewSimbolo.setText("-");
+        }
+
+        holder.mTextViewDescripcion.setText(r.getClasificacionDesc());
         holder.mTextViewFecha.setText(r.getFechaDocumento());
-        holder.mTextViewImpuesto.setText("IRP");
+        holder.mTextViewImpuesto.setText(r.getTipoImpuesto());
         holder.mTextViewMonto.setText(r.getMontoTotal()+"");
 
     }

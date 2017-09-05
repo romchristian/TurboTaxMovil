@@ -86,6 +86,10 @@ public class RegistroParam {
     private String fechaRegistro;
     @DatabaseField
     private String estadoDescarga;
+    @DatabaseField
+    private String clasificacionDesc;
+    @DatabaseField
+    private String tipoMovimiento;
 
     public String getRegistroUUID() {
         return registroUUID;
@@ -375,5 +379,19 @@ public class RegistroParam {
         this.estadoDescarga = estadoDescarga;
     }
 
+    public String getClasificacionDesc() {
+        return clasificacionDesc;
+    }
 
+    public void setClasificacionDesc(String clasificacionDesc) {
+        this.clasificacionDesc = clasificacionDesc;
+    }
+
+    public String getTipoMovimiento() {
+        return tipoMovimiento;
+    }
+
+    public void setTipoMovimiento(String tipoMovimiento) {
+        this.tipoMovimiento = tipoMovimiento;
+    }
 }

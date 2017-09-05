@@ -3,6 +3,7 @@ package turbotaxmovil.ideaspymes.com.py.turbotaxmovil.wizard;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.SyncStateContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,10 +29,13 @@ import java.util.UUID;
 
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.custom.NumberTextWatcher;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.ClasificacionUsuario;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.DatabaseHelper;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Impuesto;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.Libro;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.OrmLiteBaseAppCompatActivity;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.entities.RegistroParam;
+import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.utils.Contants;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.servicios.RegistroWS;
 import turbotaxmovil.ideaspymes.com.py.turbotaxmovil.volley.servicios.RucWS;
 
@@ -42,6 +46,7 @@ import static turbotaxmovil.ideaspymes.com.py.turbotaxmovil.R.id.textView;
 
 public class DocumentoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelper> {
 
+    private static final String TAG = DocumentoActivity.class.getSimpleName();
     private EditText ruc, razonSocial, timbrado, codEst, puntoExp, numero, gravada10, gravada5,exenta;
     private EditText fecha, vencimiento;
     private ImageView imgfecha, imgvencimiento;
@@ -79,8 +84,10 @@ public class DocumentoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelp
                 codEst = (EditText) findViewById(R.id.codEsta);
         puntoExp = (EditText) findViewById(R.id.puntoExp);
         numero = (EditText) findViewById(R.id.numero);
+
         gravada10 = (EditText) findViewById(R.id.gravada10);
         gravada10.addTextChangedListener(new NumberTextWatcher(gravada10));
+
         gravada5 = (EditText) findViewById(R.id.gravada5);
         gravada5.addTextChangedListener(new NumberTextWatcher(gravada5));
         exenta = (EditText) findViewById(R.id.exenta);
@@ -225,6 +232,32 @@ public class DocumentoActivity extends OrmLiteBaseAppCompatActivity<DatabaseHelp
 
         r.setBienesGanaciales(false);
         r.setCantCuotas(0);
+
+
+
+        try {
+            Libro libro = getHelper().getLibroDao().queryForId(Proceso.instance().libroId.intValue());
+            switch (libro.getNombre()){
+                case "VENTAS":
+                case "VENTA":
+                case "INGRESOS":
+                case "INGRESO":
+                    r.setTipoMovimiento(Contants.TIPO_MOV_INGRESO);
+                    break;
+                case "COMPRAS":
+                case "COMPRA":
+                case "EGRESOS":
+                case "EGRESO":
+                    r.setTipoMovimiento(Contants.TIPO_MOV_EGRESO);
+                    break;
+            }
+
+            ClasificacionUsuario clasificacion = getHelper().getClasificacionUsuarioDao().queryForId(Proceso.instance().clasificacionId.intValue());
+            r.setClasificacionDesc(clasificacion.getNombre());
+
+        } catch (SQLException e) {
+            Log.e(TAG,"Error al buscar libro: " + e.getMessage());
+        }
 
         r.setLibroId(Proceso.instance().libroId);
         r.setClasificacionUsuarioId(Proceso.instance().clasificacionId);
